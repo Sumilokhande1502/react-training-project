@@ -19,16 +19,11 @@ function App() {
         width={100}
         timeout={3000} //3 secs
       />
-      <Navbar />
+      <Navbar/>
       <Carousel />
+
+        <Search />
       <Login />
-      <Search />
-      <div className="row w-100 justify-content-center">
-        {Cakedata.map((cake, index)=>{
-          return <Cake data={cake} key={index}/>
-        })}
-        
-      </div>
     </div>
   );
 }

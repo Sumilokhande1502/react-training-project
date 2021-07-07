@@ -1,24 +1,9 @@
-import {useState, useEffect} from 'react';
+import cakesdata from './Cakesdata';
+import {useState} from 'react';
 
 
 
 function Navbar(){
-
-    var [searchMessage, setSearchMessage] = useState();
-  
-    let searchObj = {};
-    useEffect(() => { 
-      alert("Component mounted")
-    }, [searchMessage])
-  
-    var searchBtn = function (){
-      setSearchMessage("Cakes")
-    }
-
-    var handleSearchInput = function(e){
-      searchObj.search = e.target.value;
-      setSearchMessage(searchObj.search)
-    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,8 +19,8 @@ function Navbar(){
       </li>
     </ul>
     <form className="form-inline my-2 my-lg-0">
-      <input onChange={handleSearchInput} className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-      <button onClick={searchBtn} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+      <button className="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
     </form>
     <div className="form-inline my-2 my-lg-0">
       {true && <button className="btn btn-primary my-2 my-sm-0 ml-2" type="button">Login</button> }

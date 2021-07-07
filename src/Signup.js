@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 
 
 
-class Signup extends React.Component(){
+class Signup extends Component(){
     // constructor(){
     //     super()
     //     this.state = {
