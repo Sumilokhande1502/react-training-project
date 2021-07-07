@@ -1,4 +1,4 @@
-import cakes from './cakesdata';
+import cakes from './Cakesdata';
 import {useState, useEffect} from 'react';
 
 export default function Search(){
