@@ -1,7 +1,7 @@
 
 
 function Cake(props){
-   console.log("these are the props", props)
+   //console.log("these are the props", props)
     return(
         <div className="card mt-3 ml-3" style={{width: 18+'rem'}}>
             <img style={{height: 200+'px'}} src={props.data.image}className="card-img-top" alt="..." />

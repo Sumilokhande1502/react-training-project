@@ -2,7 +2,7 @@ import cakesdata from "./Cakesdata";
 import { useState, useEffect } from "react";
 import Cake from "./Cake";
 
-function Search() {
+function Search(props) {
   const [search, setSearchValue] = useState("");
   const [cakeData, setCakeData] = useState(cakesdata);
 
@@ -13,20 +13,28 @@ function Search() {
   let cakeArray = cakesdata;
 
   let handleSearch = () => {
-      if(search !== ''){
-          cakeArray = cakesdata.filter((each) => {
-            return each.name.toString() === search.toString();
-          });
-        }else{
-            cakeArray=cakesdata;
-        }
-    setCakeData(cakeArray);
+    if (search !== "") {
+      const cakeArray = cakesdata.filter((el) =>
+        el.name.toLowerCase().includes(search)
+      );
 
+      console.log(cakeArray);
+      setCakeData(cakeArray);
+      setSearchValue('')
+      return { cakeArray };
+    } else {
+      cakeArray = cakesdata;
+      setCakeData(cakeArray);
+      setSearchValue('')
+    }
   };
   useEffect(() => {}, []);
 
   return (
     <div className="container-fluid mt-3">
+      <div>
+        <p>Search string from app.js {props.searchquery}</p>
+      </div>
       <div className="row w-100 justify-content-end">
         <form className="form-inline my-2 my-lg-0">
           <input
@@ -35,7 +43,7 @@ function Search() {
             type="search"
             placeholder="Search"
             aria-label="Search"
-            
+            value={search}
           />
           <button
             onClick={handleSearch}
@@ -47,20 +55,13 @@ function Search() {
         </form>
       </div>
       <div className="row w-100 justify-content-center">
-        {cakeData.length === 0 ? 
-            cakeData.map((cake, index) => {
-                return <Cake data={cake} key={index} />;
-                })
-            : cakeData.map((cake, index) => {
-                return <Cake data={cake} key={index} />;
-                })}
-        {/* {filteredCake.length === 0
-                ? cakesdata.map((cake, index) => {
-                    return <Cake data={cake} key={index} />;
-                    })
-                : filteredCake.map((cake, index) => {
-                    return <Cake data={cake} key={index} />;
-                    })} */}
+        {cakeData.length === 0
+          ? cakeData.map((cake, index) => {
+              return <Cake data={cake} key={index} />;
+            })
+          : cakeData.map((cake, index) => {
+              return <Cake data={cake} key={index} />;
+            })}
       </div>
     </div>
   );

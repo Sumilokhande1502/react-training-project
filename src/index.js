@@ -4,6 +4,34 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import axios from "axios";
+
+let token = localStorage.getItem('Data');
+
+// axios.interceptors.request.use((request) => {
+
+//   if(request.url.includes("upload")){
+//     if(token){
+//       request.headers["authtoken"] = token;
+//     }
+//   }
+//   return request;
+// }, (error)=>{
+//   return Promise.reject(error)
+// })
+
+axios.interceptors.request.use((request)=>{
+  console.log("......" , request.url)
+  if(request.url.includes("upload") || request.url.includes("cart") ){
+  if(localStorage.token){
+  request.headers["authtoken"] = localStorage.token
+  } 
+  }
+  
+  return request
+  }, (error)=>{
+  return Promise.reject(error)
+  }) 
 
 ReactDOM.render(
   
