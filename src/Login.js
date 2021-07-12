@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Login() {
+function Login(props) {
   //   var [errorMessage, setErrorMess] = useState();
   var [enteredText, setEnteredText] = useState();
   let user = {};
@@ -20,6 +20,7 @@ function Login() {
         console.log(res);
         console.log(res.data);
         localStorage.setItem("Data", res['data'].token);
+        props.history.push("/")
         setEnteredText("");
       });
   };

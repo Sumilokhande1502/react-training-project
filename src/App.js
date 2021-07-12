@@ -45,7 +45,7 @@ function App (){
   const [isLoading, setLoading] = useState(true);
 
   function fakeRequest() {
-    return new Promise(resolve => setTimeout(() => resolve(), 5000));
+    return new Promise(resolve => setTimeout(() => resolve(), 6000));
   }
 
   useEffect(() => {
@@ -57,6 +57,7 @@ function App (){
       }
     });
   }, []);
+
   const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
     if (isLoading) {
       return <div style={style}>
@@ -66,8 +67,9 @@ function App (){
       color="#00BFFF"
       height={100}
       width={100}
-      timeout={1000000} 
+      timeout={10000} 
     /> 
+    <p className="text-center">Loading...</p>
         </div> //app is not ready (fake request is in process)  
     }
     return (
@@ -82,9 +84,9 @@ function App (){
             <Route path="/search" exact component={Search} />
             <Route path="/addcake" exact component={Addcake} />
             <Route path="/cake/:cakeid" exact component={Cakedetails} />
-            <Route path="**">
+            {/* <Route path="**">
               <Redirect to="/"></Redirect>
-            </Route>
+            </Route> */}
           </Switch>
         </Router>
       </div>

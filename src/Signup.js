@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Signup() {
+function Signup(props) {
     var [enteredText, setEnteredText] = useState();
 
   let register = {};
@@ -29,6 +29,7 @@ function Signup() {
         .then((res) => {
           console.log(res);
           console.log(res.data);
+          props.history.push("/login")
           setEnteredText("");
         });
     }
