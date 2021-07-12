@@ -1,33 +1,34 @@
 import querystring from 'query-string';
-import {useEffect} from 'react'
+import {useState, useEffect} from 'react'
+import cakesdata from './Cakesdata';
 
 function Search(props) {
-  // const [search, setSearchValue] = useState("");
-  // const [cakeData, setCakeData] = useState(cakesdata);
+  const [search, setSearchValue] = useState("");
+  const [cakeData, setCakeData] = useState(cakesdata);
 
-  // let searchFunction = (event) => {
-  //   setSearchValue(event.target.value);
-  // };
+  let searchFunction = (event) => {
+    setSearchValue(event.target.value);
+  };
 
-  // let cakeArray = cakesdata;
+  let cakeArray = cakesdata;
 
-  // let handleSearch = () => {
-  //   if (search !== "") {
-  //     const cakeArray = cakesdata.filter((el) =>
-  //       el.name.toLowerCase().includes(search)
-  //     );
+  let handleSearch = () => {
+    if (search !== "") {
+      const cakeArray = cakesdata.filter((el) =>
+        el.name.toLowerCase().includes(search)
+      );
 
-  //     console.log(cakeArray);
-  //     setCakeData(cakeArray);
-  //     setSearchValue('')
-  //     return { cakeArray };
-  //   } else {
-  //     cakeArray = cakesdata;
-  //     setCakeData(cakeArray);
-  //     setSearchValue('')
-  //   }
-  // };
-  // useEffect(() => {}, []);
+      console.log(cakeArray);
+      setCakeData(cakeArray);
+      setSearchValue('')
+      return { cakeArray };
+    } else {
+      cakeArray = cakesdata;
+      setCakeData(cakeArray);
+      setSearchValue('')
+    }
+  };
+  useEffect(() => {}, []);
 
   let query = querystring.parse(props.location.search);
   console.log("query is: " + query);
