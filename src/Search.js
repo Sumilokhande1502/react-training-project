@@ -1,41 +1,47 @@
-import cakesdata from "./Cakesdata";
-import { useState, useEffect } from "react";
-import Cake from "./Cake";
+import querystring from 'query-string';
+import {useEffect} from 'react'
 
 function Search(props) {
-  const [search, setSearchValue] = useState("");
-  const [cakeData, setCakeData] = useState(cakesdata);
+  // const [search, setSearchValue] = useState("");
+  // const [cakeData, setCakeData] = useState(cakesdata);
 
-  let searchFunction = (event) => {
-    setSearchValue(event.target.value);
-  };
+  // let searchFunction = (event) => {
+  //   setSearchValue(event.target.value);
+  // };
 
-  let cakeArray = cakesdata;
+  // let cakeArray = cakesdata;
 
-  let handleSearch = () => {
-    if (search !== "") {
-      const cakeArray = cakesdata.filter((el) =>
-        el.name.toLowerCase().includes(search)
-      );
+  // let handleSearch = () => {
+  //   if (search !== "") {
+  //     const cakeArray = cakesdata.filter((el) =>
+  //       el.name.toLowerCase().includes(search)
+  //     );
 
-      console.log(cakeArray);
-      setCakeData(cakeArray);
-      setSearchValue('')
-      return { cakeArray };
-    } else {
-      cakeArray = cakesdata;
-      setCakeData(cakeArray);
-      setSearchValue('')
-    }
-  };
-  useEffect(() => {}, []);
+  //     console.log(cakeArray);
+  //     setCakeData(cakeArray);
+  //     setSearchValue('')
+  //     return { cakeArray };
+  //   } else {
+  //     cakeArray = cakesdata;
+  //     setCakeData(cakeArray);
+  //     setSearchValue('')
+  //   }
+  // };
+  // useEffect(() => {}, []);
+
+  let query = querystring.parse(props.location.search);
+  console.log("query is: " + query);
+
+  useEffect(() => {
+    console.log("query is: " + query);
+    let apiurl=process.env.REACT_APP_BASE_API_URL+"/searchcakes?q="+query.q}, [query.q])
 
   return (
     <div className="container-fluid mt-3">
       <div>
         <p>Search string from app.js {props.searchquery}</p>
       </div>
-      <div className="row w-100 justify-content-end">
+      {/* <div className="row w-100 justify-content-end">
         <form className="form-inline my-2 my-lg-0">
           <input
             onChange={searchFunction}
@@ -62,7 +68,7 @@ function Search(props) {
           : cakeData.map((cake, index) => {
               return <Cake data={cake} key={index} />;
             })}
-      </div>
+      </div> */}
     </div>
   );
 }

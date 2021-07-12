@@ -1,63 +1,32 @@
 import "./App.css";
 import Loader from "react-loader-spinner";
-import Navbar from "./Navbar";
-import Fileupload from './Fileupload';
-import { Carousel } from "./Carousel";
+import Addcake from './Addcake';
 import Login from "./Login";
-//import Search from "./Search";
-import Cake from "./Cake";
-import { useState, useEffect } from "react";
-import cakesdata from "./Cakesdata";
+import Signup from'./Signup';
+import Search from "./Search";
+import Home from './Home';
+import Dashboard from './Dashboard';
+import Cakedetails from'./Cakedetails';
+import { useState, useEffect } from 'react';
+
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 
 function App() {
-  let [searchtext, setSearchtext] = useState("");
-  const [cakeData, setCakeData] = useState(cakesdata);
-  let cakeArray = cakesdata;
-  let function1 = function (searchstring) {
-    setSearchtext(searchstring);
-
-    if (searchstring !== "") {
-      const cakeArray = cakesdata.filter((el) =>
-        el.name.toLowerCase().includes(searchstring)
-      );
-      console.log(cakeArray);
-      setCakeData(cakeArray);
-      setSearchtext('')
-      return { cakeArray };
-    } else {
-      cakeArray = cakesdata;
-      setCakeData(cakeArray);
-      setSearchtext('')
-    }
-  };
-  useEffect(() => {}, []);
-
-  
 
   return (
     <div className="App">
-      <Loader
-        type="ThreeDots"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={3000} //3 secs
-      />
-      <Navbar fun={function1} />
-      <Fileupload />
-      {/* <Login /> */}
-      <Carousel />
-       {/* <Search searchquery={searchtext} /> */}
-      <div className="row w-100 justify-content-center">
-        {cakeData.length === 0
-          ? cakeData.map((cake, index) => {
-              return <Cake data={cake} key={index} />;
-            })
-          : cakeData.map((cake, index) => {
-              return <Cake data={cake} key={index} />;
-            })}
-      </div>
-      <Login />
+     <Router>
+      <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/dashboard" component={Dashboard}></Route>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/signup" exact component={Signup}/>
+          <Route path="/search" exact component={Search}/>
+          <Route path="/addcake" exact component={Addcake}/>
+          <Route path="/cake/:cakeid" exact component={Cakedetails}/>
+          <Route path="**"><Redirect to="/"></Redirect></Route>
+      </Switch>
+     </Router>
     </div>
   );
 }

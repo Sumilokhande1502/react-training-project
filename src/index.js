@@ -27,7 +27,6 @@ axios.interceptors.request.use((request)=>{
   request.headers["authtoken"] = localStorage.token
   } 
   }
-  
   return request
   }, (error)=>{
   return Promise.reject(error)

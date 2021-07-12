@@ -1,3 +1,7 @@
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {useState} from 'react';
+
 function Navbar(props) {
   let searchText;
   let handleSearchText = (e) => {
@@ -8,9 +12,7 @@ function Navbar(props) {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Navbar
-      </a>
+      <Link to="/" className="navbar-brand">{props.children}</Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -25,11 +27,9 @@ function Navbar(props) {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
-            </a>
-          </li>
+          {/* <li className="nav-item active">
+            <Link to="/">Home</Link>
+          </li> */}
         </ul>
         <form className="form-inline my-2 my-lg-0">
           <input
