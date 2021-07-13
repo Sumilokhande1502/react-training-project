@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Style.scss";
 import React from "react";
 import Loader from 'react-loader-spinner';
 import Navbar from './Navbar';
