@@ -1,16 +1,17 @@
 import "./App.css";
 import "./Style.scss";
 import React from "react";
-import Loader from 'react-loader-spinner';
-import Navbar from './Navbar';
+import Loader from "react-loader-spinner";
+import Navbar from "./Navbar";
 import Addcake from "./Addcake";
 import Login from "./Login";
 import Signup from "./Signup";
 import Search from "./Search";
+import Cake from "./Cake";
 import Home from "./Home";
-import Dashboard from "./Dashboard";
 import Cakedetails from "./Cakedetails";
 import { useState, useEffect } from "react";
+import cakesdata from "./Cakesdata";
 
 import {
   BrowserRouter as Router,
@@ -19,12 +20,30 @@ import {
   Switch,
 } from "react-router-dom";
 
-function App (){
+function App() {
   let [searchtext, setSearchtext] = useState("");
+  const [cakeData, setCakeData] = useState(cakesdata);
+  let cakeArray = cakesdata;
   let function1 = function (searchstring) {
     setSearchtext(searchstring);
+
+    if (searchstring !== "") {
+      const cakeArray = cakesdata.filter((el) =>
+        el.name.toLowerCase().includes(searchstring)
+      );
+      console.log(cakeArray);
+      setCakeData(cakeArray);
+      setSearchtext("");
+      return { cakeArray };
+    } else {
+      cakeArray = cakesdata;
+      setCakeData(cakeArray);
+      setSearchtext("");
+      return { cakeArray };
+    }
   };
   useEffect(() => {}, []);
+
 
   // eslint-disable-next-line no-undef
   // state = {
@@ -46,7 +65,7 @@ function App (){
   const [isLoading, setLoading] = useState(true);
 
   function fakeRequest() {
-    return new Promise(resolve => setTimeout(() => resolve(), 6000));
+    return new Promise((resolve) => setTimeout(() => resolve(), 6000));
   }
 
   useEffect(() => {
@@ -59,40 +78,56 @@ function App (){
     });
   }, []);
 
-  const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
-    if (isLoading) {
-      return <div style={style}>
-        <Loader
-      className="d-flex flex-direction-column"
-      type="TailSpin"
-      color="#00BFFF"
-      height={100}
-      width={100}
-      timeout={10000} 
-    /> 
-    <p className="text-center">Loading...</p>
-        </div> //app is not ready (fake request is in process)  
-    }
+  const style = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  };
+  if (isLoading) {
     return (
-      <div className="App">
-        <Router>
+      <div style={style}>
+        <Loader
+          className="d-flex flex-direction-column"
+          type="TailSpin"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={10000}
+        />
+        <p className="text-center">Loading...</p>
+      </div>
+    ); //app is not ready (fake request is in process)
+  }
+  return (
+    <div className="App">
+      <Router>
         <Navbar fun={function1}>Cakes Gallary</Navbar>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dashboard" component={Dashboard}></Route>
-            <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/search" exact component={Search} />
-            <Route path="/addcake" exact component={Addcake} />
-            <Route path="/cake/:cakeid" exact component={Cakedetails} />
-            {/* <Route path="**">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/search" exact component={Search} />
+          <Route path="/addcake" exact component={Addcake} />
+          <Route path="/cake" exact>
+            <div className="row">
+              {cakeData.length === 0
+                ? cakeData.map((cake, index) => {
+                    return <Cake data={cake} key={index} />;
+                  })
+                : cakeData.map((cake, index) => {
+                    return <Cake data={cake} key={index} />;
+                  })}
+            </div>
+          </Route>
+          <Route exact path="/cake/:cakeid" component={Cakedetails} />
+          {/* <Route path="**">
               <Redirect to="/"></Redirect>
             </Route> */}
-          </Switch>
-        </Router>
-      </div>
-    );
-
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;

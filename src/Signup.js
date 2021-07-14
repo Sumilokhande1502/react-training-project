@@ -1,8 +1,10 @@
 
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 import axios from "axios";
 
 function Signup(props) {
+  let style={textDecoration: 'none'}
     var [enteredText, setEnteredText] = useState();
 
   let register = {};
@@ -81,7 +83,7 @@ function Signup(props) {
         >
           Register
         </button>
-        {/* //{errorMessage} */}
+        <Link to="/login" style={style}><p className="mt-2">Already have an account? Login Here</p></Link>
       </form>
     </div>
   );

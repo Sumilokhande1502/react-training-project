@@ -1,6 +1,12 @@
 import {Link} from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import Home from './Home';
 import {useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
 function Navbar(props) {
   let searchText;
@@ -12,7 +18,7 @@ function Navbar(props) {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" className="navbar-brand">{props.children}</Link>
+      <Link to="/cake" className="navbar-brand">{props.children}</Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -50,9 +56,10 @@ function Navbar(props) {
         </form>
         <div className="form-inline my-2 my-lg-0">
           {true && (
-            <button className="btn btn-primary my-2 my-sm-0 mr-2" type="button">
+            <Link to="/login"><button className="btn btn-primary my-2 my-sm-0 mr-2" type="button">
               Login
             </button>
+            </Link>
           )}
           {false && (
             <button className="btn btn-danger my-2 my-sm-0" type="button">

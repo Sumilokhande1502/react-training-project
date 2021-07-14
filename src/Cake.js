@@ -13,7 +13,7 @@ let Cake = (props)=>{
                         <p className="card-text">{props.data.price} rs.</p>
                     </div>
                 </Link>
-                <div className="btn-group m-3">
+                <div className="btn-group m-3 buttonClass">
                     <button type="button" className="btn btn-primary mr-3">Add to cart</button>
                     <button type="button" className="btn btn-primary btn-small">Buy Now</button>
                 </div>
